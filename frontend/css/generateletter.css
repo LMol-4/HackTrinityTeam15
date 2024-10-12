@@ -161,3 +161,18 @@ select:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
 }
+
+/* Adjust the editor's width and font to match your page */
+#editor {
+    height: 400px; /* Set the height as needed */
+}
+
+.ql-toolbar.ql-snow {
+    background-color: #f9f9f9; /* Match your page's background color */
+}
+
+.ql-container.ql-snow {
+    border: 1px solid #ccc; /* Match your page's border styles */
+    font-family: 'Your Preferred Font', sans-serif;
+    font-size: 16px; /* Adjust the font size as needed */
+}
