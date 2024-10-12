@@ -7,27 +7,29 @@
     <link rel="stylesheet" href="../css/homepage.css">
 </head>
 <body>
-    <div id="gradient-bg"></div>
-    <canvas id="particleCanvas"></canvas>
+    <video autoplay muted loop id="bgvideo">
+    <source src="../videos/homepage-bg-vid.mp4" type="video/mp4">
+    </video>
 
     <nav>
-        <a href="homepage.html" class="logo">Rentalyze</a>
+        <a href="homepage.html" class="logo">RentaLyze</a>
         <div class="nav-right">
             <ul class="nav-links">
                 <li><a href="generateletter.html">Generate Letter</a></li>
                 <li><a href="ourmission.html">Our Mission</a></li>
-                <li><a href="#about">About Us</a></li>
+                <li><a href="#aboutUs">About Us</a></li>
             </ul>
         </div>
     </nav>
 
     <section class="section" id="hero">
         <div class="section-content">
-            <div class="company-name">Rentalyze</div>
-            <h1>MAKING HOUSING<br>EASIER FOR ALL</h1>
-            <a href="#register" class="cta-button">Get Started</a>
+            <div class="company-name">RentaLyze</div>
+            <h1>Where Housing Disputes,<br>Meet Smart Resolutions</h1>
+            <a href="generateletter.html" class="cta-button">Get Started</a>
         </div>
     </section>
-    <script src="../js/animation.js"></script>
+    <script src="https://kit.fontawesome.com/d06fd0de72.js" crossorigin="anonymous"></script>
+    <script src="../js/homepage.js"></script>
 </body>
 </html>
