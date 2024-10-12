@@ -21,8 +21,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, #000000, #ffffff);
-            z-index: -2;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            z-index: -1;
         }
 
         #particleCanvas {
@@ -35,99 +35,66 @@
         }
 
         nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            background: linear-gradient(to right, rgba(26, 26, 26, 0.8), rgba(156, 102, 68, 0.8));
-            backdrop-filter: blur(10px);
-            transition: background 0.3s ease;
+            background: rgba(26, 26, 26, 1);
         }
 
         .logo {
-            font-size: 1.2rem;
+            font-size: 24px;
             font-weight: bold;
             color: #fff;
             text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-right: 2rem;
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            flex-grow: 1;
-        }
-
-        .search-form {
-            margin-left: 0;
-            margin-right: auto;
-        }
-
-        .search-input {
-            width: 300px;
-            padding: 10px 0;
-            font-size: 18px;
-            background-color: transparent;
-            color: #fff;
-            border: none;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-
-        .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .search-input:hover,
-        .search-input:focus {
-            border-bottom: 2px solid #fff;
         }
 
         .nav-links {
             display: flex;
             list-style-type: none;
-            margin-left: auto;
+            margin: 0;
+            padding: 0;
         }
 
         .nav-links li {
-            margin-left: 1.5rem;
+            margin-left: 20px;
         }
 
         .nav-links a {
             color: #fff;
             text-decoration: none;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 5px 10px;
+            font-weight: 500;
             transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #fff;
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
             color: #fff;
         }
 
-        .nav-links a::after {
-            content: none;
-        }
-
         .nav-links a:hover::after {
-            content: '';
-            position: absolute;
             width: 100%;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: #fff;
-            transition: width 0.3s ease;
         }
 
         .section {
@@ -137,88 +104,99 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            padding: 80px 20px;
+            transition: transform 1s ease-out, opacity 1s ease-out;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
         .content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
-            max-width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 0;
-        }
-
-        .text-content {
-            max-width: 45%;
-            padding: 20px 50px;
-        }
-
-        .video-container {
-            width: 45%;
-            margin-right: 5%;
-            overflow: hidden;
-            border-radius: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.3); /* More visible border */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.05);
-            padding: 10px; /* Add some padding inside the container */
-        }
-
-        .video-container video {
             width: 100%;
+            box-sizing: border-box;
+        }
+
+        .text-content, .image-content {
+            flex: 1;
+            max-width: 48%;
+        }
+
+        .section-image {
+            max-width: 100%;
             height: auto;
-            border-radius: 8px; /* Slightly smaller radius than the container */
-            display: block;
-            filter: grayscale(60%) hue-rotate(150deg) saturate(40%);
-            transition: filter 0.3s ease;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .video-container video:hover {
-            filter: grayscale(20%) hue-rotate(150deg) saturate(60%);
-        }
-
-        /* Adjust the alternation for the first section */
-        #imagine-future .content {
-            flex-direction: row;
-        }
-
-        #imagine-future .text-content {
-            margin-left: 5%;
-            margin-right: 0;
-        }
-
-        /* Reverse the alternation */
-        .section:nth-child(odd) .content {
+        /* Alternating layout */
+        .section:nth-child(even) .content {
             flex-direction: row-reverse;
         }
 
-        .section:nth-child(even) .text-content {
-            margin-left: 5%; /* Push even paragraphs closer to the left edge */
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .text-content, .image-content {
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .section-image {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .section:nth-child(even) .content {
+                flex-direction: column;
+            }
         }
 
-        .section:nth-child(odd) .text-content {
-            margin-right: 5%; /* Push odd paragraphs closer to the right edge */
+        h1, h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .section h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
         }
 
-        .section p {
-            font-size: 18px;
+        p {
+            font-size: 1.2rem;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
         }
 
         .cta-button {
+            display: inline-block;
             padding: 15px 30px;
-            font-size: 18px;
+            font-size: 1.2rem;
             color: #000;
             background-color: #fff;
-            border: 2px solid #fff; /* Add a border */
-            cursor: pointer;
-            transition: all 0.3s ease; /* Change to 'all' for smoother transition */
+            border: 2px solid #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .cta-button:hover {
@@ -226,32 +204,158 @@
             color: #fff;
         }
 
+        .timeline-item {
+            margin-bottom: 30px;
+        }
+
         @media (max-width: 768px) {
-            .content {
-                flex-direction: column;
-                text-align: center;
+            h1, h2 {
+                font-size: 2.5rem;
             }
 
-            .text-content, .video-container {
-                max-width: 90%;
-                margin: 20px auto;
-            }
-
-            .section:nth-child(odd) .content {
-                flex-direction: column;
-            }
-
-            .section:nth-child(even) .text-content,
-            .section:nth-child(odd) .text-content {
-                margin: 0 auto; /* Center text for mobile */
-            }
-
-            #imagine-future .content {
-                flex-direction: column;
-            }
-
-            #imagine-future .text-content {
-                margin-left: auto;
-                margin-right: auto;
+            p, .quote {
+                font-size: 1rem;
             }
         }
+
+/* Text scramble effect */
+.scramble {
+    opacity: 0;
+}
+
+/* Text slide up effect */
+.text-slide-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.text-slide-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Text wave effect */
+.text-wave .char {
+    display: inline-block;
+    animation: wave 1s infinite;
+    animation-delay: calc(0.1s * var(--char-index));
+}
+
+@keyframes wave {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Text highlight effect */
+.text-highlight .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.text-highlight .word.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.text-highlight .word:nth-child(odd) {
+    color: #ff00c1;
+}
+
+.text-highlight .word:nth-child(even) {
+    color: #00fff9;
+}
+
+/* Add these styles to the end of your existing CSS */
+
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.slide-up {
+    transform: translateY(20px);
+}
+
+.fade-in.appear {
+    opacity: 1;
+}
+
+.slide-up.appear {
+    transform: translateY(0);
+}
+
+/* Add this at the end of your CSS file */
+.section {
+    transition: transform 1s ease-out, opacity 1s ease-out;
+}
+
+.section.zoom-out {
+    transform: scale(0.7);  /* More dramatic zoom out */
+    opacity: 0.3;  /* More transparent when zoomed out */
+}
+
+.section.zoom-in {
+    transform: scale(1.1);  /* More dramatic zoom in */
+    opacity: 1;
+}
+
+/* Add this to your existing CSS */
+.centered-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.centered-content .text-content {
+    max-width: 800px;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Add or modify these rules in your CSS */
+
+#ai-solutions {
+    width: 100vw;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 80px 0; /* Remove horizontal padding */
+    box-sizing: border-box;
+}
+
+#ai-solutions .content {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 20px; /* Add horizontal padding to content instead */
+    box-sizing: border-box;
+}
+
+#ai-solutions .centered-content {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#ai-solutions .text-content {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Adjust the zoom effect for this section */
+#ai-solutions.zoom-in {
+    transform: scale(1); /* Remove zoom for this section */
+}
+
+#ai-solutions.zoom-out {
+    transform: scale(1); /* Remove zoom for this section */
+}

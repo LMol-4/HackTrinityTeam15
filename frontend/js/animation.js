@@ -1,4 +1,3 @@
-
 // Particle effect
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas.getContext('2d');
@@ -59,9 +58,9 @@ function animateGradient() {
             direction *= -1;
         }
 
-        const color1 = 'hsl(0, 0%, 10%)';  // Light black
-        const color2 = 'hsl(0, 0%, 50%)';  // Grey
-        const color3 = 'hsl(0, 0%, 90%)';  // Almost white
+        const color1 = 'hsl(0, 0%, 12%)';  // Dark grey
+        const color2 = 'hsl(0, 0%, 18%)';  // Medium-dark grey
+        const color3 = 'hsl(0, 0%, 28%)';  // Medium grey
 
         gradientBg.style.background = `linear-gradient(
             135deg,
@@ -86,4 +85,31 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             behavior: 'smooth'
         });
     });
+});
+
+// Add this at the end of your animation.js file
+
+function handleIntersection(entries, observer) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.remove('zoom-out');
+            entry.target.classList.add('zoom-in');
+        } else {
+            entry.target.classList.remove('zoom-in');
+            entry.target.classList.add('zoom-out');
+        }
+    });
+}
+
+const options = {
+    root: null,
+    rootMargin: '-10%',
+    threshold: 0.2
+};
+
+const observer = new IntersectionObserver(handleIntersection, options);
+
+document.querySelectorAll('.section').forEach(section => {
+    section.classList.add('zoom-out');
+    observer.observe(section);
 });
