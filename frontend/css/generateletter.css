@@ -82,19 +82,38 @@ textarea {
     width: 100%;
     padding: 15px 30px;
     font-size: 18px;
-    background-color: rgba(156, 102, 68, 0.5);
-    color: #fff;
-    border: 2px solid rgba(156, 102, 68, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+    border: 2px solid rgba(255, 255, 255, 1);
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.generate-button::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: rgba(255, 255, 255, 0.2);
+    filter: blur(5px);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .generate-button:hover {
-    background-color: rgba(156, 102, 68, 0.8);
-    color: #fff;
-    border-color: #9c6644;
-    box-shadow: 0 0 15px rgba(156, 102, 68, 0.5);
+    background-color: rgba(255, 255, 255, 1);
+    color: #000;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+.generate-button:hover::before {
+    opacity: 1;
 }
 
 #generated-letter {
