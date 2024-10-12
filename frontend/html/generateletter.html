@@ -14,7 +14,7 @@
     <canvas id="particleCanvas"></canvas>
 
     <nav>
-        <a href="homepage.html" class="logo">Rentalyze</a>
+        <a href="homepage.html" class="logo">RentaLyze</a>
         <div class="nav-right">
             <ul class="nav-links">
                 <li><a href="generateletter.html">Generate Letter</a></li>
@@ -70,17 +70,16 @@
                     <label for="file">Upload Rental Contract</label>
                     <input type="file" id="file" name="file" accept=".pdf" required>
                 </div>
-                <button id="generate-button" type="button" class="generate-button">Generate Letter</button>
+                <button id="generate-button" type="button" class="generate-button btn btn-primary mt-3">Generate Letter</button>
             </form>
         </div>
         <div class="main-content">
-            <!-- Removed the "Output" heading and generated-letter div -->
-
             <!-- Quill Editor Container (Visible by Default) -->
             <div id="editor-container">
                 <h2>Edit Letter</h2>
                 <div id="quill-editor"></div>
-                <button id="save-edit-button" class="btn btn-primary mt-3">Save Edit</button>
+                <!-- Replace "Save Edit" with "Download PDF" -->
+                <button id="download-pdf-button" class="btn btn-success btn-download">Download PDF</button>
             </div>
 
             <!-- Response Message -->

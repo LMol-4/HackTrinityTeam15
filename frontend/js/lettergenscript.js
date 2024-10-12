@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const responseElement = document.getElementById('response');
   const editorContainer = document.getElementById('editor-container');
   const quillEditorDiv = document.getElementById('quill-editor');
-  const saveEditButton = document.getElementById('save-edit-button');
+  const downloadPdfButton = document.getElementById('download-pdf-button');
 
   // Initialize Quill editor with the 'snow' theme
   const quill = new Quill('#quill-editor', {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Check if all elements are present
-  if (!form || !generateButton || !responseElement || !editorContainer || !quillEditorDiv || !saveEditButton) {
+  if (!form || !generateButton || !responseElement || !editorContainer || !quillEditorDiv || !downloadPdfButton) {
     console.error('One or more required DOM elements are missing.');
     return;
   }
@@ -65,19 +65,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Event listener for the Save Edit button
-  saveEditButton.addEventListener('click', async () => {
-    // Get the edited content from Quill (in HTML format)
-    const editedContent = quill.root.innerHTML;
+  // Event listener for the Download PDF button
+  downloadPdfButton.addEventListener('click', async () => {
+    // Get the edited content from Quill (in plain text or HTML)
+    const editedContent = quill.getText().trim(); // Using plain text
+    // If you prefer HTML, use:
+    // const editedContent = quill.root.innerHTML;
 
-    // Optional: Validate the edited content before sending
+    if (!editedContent) {
+      alert('The letter is empty. Please generate and edit the letter before downloading.');
+      return;
+    }
 
     try {
       // Disable the button to prevent multiple submissions
-      saveEditButton.disabled = true;
-      responseElement.innerText = 'Saving edits, please wait...';
+      downloadPdfButton.disabled = true;
+      responseElement.innerText = 'Generating PDF, please wait...';
 
-      // Send the edited content to the backend to generate a PDF or perform other actions
+      // Send the edited content to the backend to generate a PDF
       const response = await fetch('http://localhost:8000/generate-pdf/', {
         method: 'POST',
         headers: {
@@ -91,9 +96,11 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error(errorData.error || 'Server error');
       }
 
-      // Assuming the backend returns a PDF, you can trigger a download
+      // Receive the PDF as a Blob
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
+
+      // Create a temporary link to trigger the download
       const a = document.createElement('a');
       a.href = url;
       a.download = 'edited_letter.pdf';
@@ -102,13 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
       a.remove();
       window.URL.revokeObjectURL(url);
 
-      responseElement.innerText = 'Edits saved and PDF generated successfully.';
+      responseElement.innerText = 'PDF generated and downloaded successfully.';
     } catch (error) {
-      console.error('Error saving edits:', error);
-      responseElement.innerText = `Error saving edits: ${error.message}`;
+      console.error('Error downloading PDF:', error);
+      responseElement.innerText = `Error downloading PDF: ${error.message}`;
     } finally {
       // Re-enable the button
-      saveEditButton.disabled = false;
+      downloadPdfButton.disabled = false;
     }
   });
 });
