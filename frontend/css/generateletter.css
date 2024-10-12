@@ -215,36 +215,36 @@ select:focus {
     color: #ffffff;
 }
 
-/* Ensure the editor container does not allow its children to exceed its width */
 #editor-container {
-    width: 100%; /* Ensure it takes up the full width of its parent */
-    max-width: 100%; /* Prevent it from exceeding the parent's width */
-    box-sizing: border-box; /* Include padding and border in the element's total width */
+    width: 100%;
+    max-width: 1100px;; /* Ensure it does not grow beyond the .main-content container */
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
 }
 
-/* Fix the Quill editor's width */
+
 #quill-editor {
-    width: 100%; /* Make the editor take up the full width of its container */
-    max-width: 100%; /* Prevent it from exceeding the container's width */
-    box-sizing: border-box; /* Include padding and border in the element's total width */
-    overflow-x: hidden; /* Hide any horizontal overflow */
-    white-space: normal; /* Ensure text wraps normally */
+    width: 100%;
+    max-width: 100%; /* Constrain the width */
+    box-sizing: border-box;
+    overflow-x: hidden;
+    white-space: normal;
 }
 
-/* Ensure Quill's internal containers adhere to the fixed width */
 .ql-container {
-    width: 100% !important; /* Force the container to respect the fixed width */
-    box-sizing: border-box; /* Include padding and border in the element's total width */
-    overflow-x: hidden !important; /* Hide any horizontal overflow */
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    overflow-x: hidden !important;
 }
 
 .ql-editor {
-    width: 100% !important; /* Force the editor to respect the fixed width */
-    box-sizing: border-box; /* Include padding and border in the element's total width */
-    overflow-x: hidden !important; /* Hide any horizontal overflow */
-    word-wrap: break-word; /* Break long words to prevent overflow */
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    overflow-x: hidden !important;
+    word-wrap: break-word;
 }
 
 /* Or using media queries for different screen sizes */
@@ -264,4 +264,19 @@ select:focus {
     color: #ffffff; /* Sets text color to black */
     margin-top: 20px; /* Optional */
     font-size: 1rem; /* Optional */
+}
+
+.main-content {
+    flex-grow: 1;
+    max-width: 100%; /* Set a maximum width */
+    padding: 40px;
+    overflow-y: auto;
+    background-color: transparent;
+    box-sizing: border-box;
+}
+
+#download-pdf-button {
+    height: 40px; /* Set to your desired width */
+    display: block;
+    font-size: 20px;
 }
